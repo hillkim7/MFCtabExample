@@ -63,10 +63,22 @@ BEGIN_MESSAGE_MAP(CMFCtabExampleDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMFCtabExampleDlg::OnTcnSelchangeTab1)
 END_MESSAGE_MAP()
 
 
 // CMFCtabExampleDlg message handlers
+
+void CMFCtabExampleDlg::ShowCurTabDialog()
+{
+	for (size_t i = 0; i < N_TABS; ++i)
+	{
+		if (i == (size_t)m_tabCtrl1.GetCurSel())
+			m_tabDialogs[i]->ShowWindow(SW_SHOW);
+		else
+			m_tabDialogs[i]->ShowWindow(SW_HIDE);
+	}
+}
 
 BOOL CMFCtabExampleDlg::OnInitDialog()
 {
@@ -98,6 +110,32 @@ BOOL CMFCtabExampleDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	m_tabCtrl1.InsertItem(0, _T("Tab1"));
+	m_tabCtrl1.InsertItem(1, _T("Tab2"));
+
+	// Compute tab area
+	CRect tabRect, itemRect;
+	int nX, nY, nXc, nYc;
+
+	m_tabCtrl1.GetClientRect(&tabRect);
+	m_tabCtrl1.GetItemRect(0, &itemRect);
+
+	nX = itemRect.left;
+	nY = itemRect.bottom + 1;
+	nXc = tabRect.right - itemRect.left - 1;
+	nYc = tabRect.bottom - nY - 1;
+
+	m_dlgTab1.reset(new CDlgTab1());
+	m_dlgTab1->Create(CDlgTab1::IDD, &m_tabCtrl1);
+	m_dlgTab1->SetWindowPos(NULL, nX, nY, nXc, nYc, SWP_NOOWNERZORDER);
+	m_tabDialogs[0] = m_dlgTab1.get();
+	m_dlgTab2.reset(new CDlgTab2());
+	m_dlgTab2->Create(CDlgTab2::IDD, &m_tabCtrl1);
+	m_dlgTab2->SetWindowPos(NULL, nX, nY, nXc, nYc, SWP_NOOWNERZORDER);
+	m_tabDialogs[1] = m_dlgTab2.get();
+
+	m_tabCtrl1.SetCurSel(0);
+	ShowCurTabDialog();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -151,3 +189,12 @@ HCURSOR CMFCtabExampleDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CMFCtabExampleDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// TODO: Add your control notification handler code here
+	ShowCurTabDialog();
+
+	*pResult = 0;
+}

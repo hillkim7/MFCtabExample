@@ -5,6 +5,10 @@
 #pragma once
 #include "afxcmn.h"
 
+#include "DlgTab1.h"
+#include "DlgTab2.h"
+
+#include <memory>
 
 // CMFCtabExampleDlg dialog
 class CMFCtabExampleDlg : public CDialogEx
@@ -22,7 +26,15 @@ public:
 
 // Implementation
 protected:
+	static const size_t N_TABS = 2;
 	HICON m_hIcon;
+	std::unique_ptr<CDlgTab1> m_dlgTab1;
+	std::unique_ptr<CDlgTab2> m_dlgTab2;
+	CDialog* m_tabDialogs[N_TABS];
+	CTabCtrl m_tabCtrl1;
+
+protected:
+	void ShowCurTabDialog();
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
@@ -31,5 +43,5 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	CTabCtrl m_tabCtrl1;
+	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
