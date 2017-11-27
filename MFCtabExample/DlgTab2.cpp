@@ -11,8 +11,9 @@
 
 IMPLEMENT_DYNAMIC(CDlgTab2, CDialog)
 
-CDlgTab2::CDlgTab2(CWnd* pParent /*=NULL*/)
+CDlgTab2::CDlgTab2(CWnd* pParent, CMFCtabExampleDlg* pParentDlg)
 	: CDialog(CDlgTab2::IDD, pParent)
+	, m_pParentDlg(pParentDlg)
 {
 
 }
@@ -28,7 +29,14 @@ void CDlgTab2::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CDlgTab2, CDialog)
+	ON_BN_CLICKED(IDC_TAB2_BUTTON, &CDlgTab2::OnBnClickedTab2Button)
 END_MESSAGE_MAP()
 
 
 // CDlgTab2 message handlers
+
+
+void CDlgTab2::OnBnClickedTab2Button()
+{
+	// TODO: Add your control notification handler code here
+}

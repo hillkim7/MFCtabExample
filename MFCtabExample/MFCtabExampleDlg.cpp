@@ -125,11 +125,11 @@ BOOL CMFCtabExampleDlg::OnInitDialog()
 	nXc = tabRect.right - itemRect.left - 1;
 	nYc = tabRect.bottom - nY - 1;
 
-	m_dlgTab1.reset(new CDlgTab1());
+	m_dlgTab1.reset(new CDlgTab1(NULL, this));
 	m_dlgTab1->Create(CDlgTab1::IDD, &m_tabCtrl1);
 	m_dlgTab1->SetWindowPos(NULL, nX, nY, nXc, nYc, SWP_NOOWNERZORDER);
 	m_tabDialogs[0] = m_dlgTab1.get();
-	m_dlgTab2.reset(new CDlgTab2());
+	m_dlgTab2.reset(new CDlgTab2(NULL, this));
 	m_dlgTab2->Create(CDlgTab2::IDD, &m_tabCtrl1);
 	m_dlgTab2->SetWindowPos(NULL, nX, nY, nXc, nYc, SWP_NOOWNERZORDER);
 	m_tabDialogs[1] = m_dlgTab2.get();
@@ -190,6 +190,11 @@ HCURSOR CMFCtabExampleDlg::OnQueryDragIcon()
 }
 
 
+
+void CMFCtabExampleDlg::SetTabInput(LPCTSTR msg)
+{
+	SetDlgItemText(IDC_TAB_INPUT, msg);
+}
 
 void CMFCtabExampleDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 {
