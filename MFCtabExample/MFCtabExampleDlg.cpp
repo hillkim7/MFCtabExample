@@ -56,6 +56,7 @@ CMFCtabExampleDlg::CMFCtabExampleDlg(CWnd* pParent /*=NULL*/)
 void CMFCtabExampleDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_TAB1, m_tabCtrl1);
 }
 
 BEGIN_MESSAGE_MAP(CMFCtabExampleDlg, CDialogEx)
