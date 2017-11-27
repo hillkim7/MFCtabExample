@@ -42,3 +42,17 @@ void CDlgTab1::OnBnClickedTab1Button()
 	GetDlgItemText(IDC_EDIT1, text);
 	m_pParentDlg->SetTabInput(text);
 }
+
+
+void CDlgTab1::OnOK()
+{
+	TRACE(_T(__FUNCTION__) _T(": prevent dialog closed by ENTER key\n"));
+	//CDialog::OnOK();
+}
+
+
+void CDlgTab1::OnCancel()
+{
+	TRACE(_T(__FUNCTION__) _T(": prevent dialog closed by ESC key\n"));
+	//CDialog::OnCancel();
+}

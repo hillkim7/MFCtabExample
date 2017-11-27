@@ -23,4 +23,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedTab2Button();
+	virtual void OnCancel();
+	virtual void OnOK();
 };

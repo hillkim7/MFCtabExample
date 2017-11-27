@@ -40,3 +40,17 @@ void CDlgTab2::OnBnClickedTab2Button()
 {
 	// TODO: Add your control notification handler code here
 }
+
+
+void CDlgTab2::OnCancel()
+{
+	TRACE(_T(__FUNCTION__) _T(": prevent dialog closed by ENTER key\n"));
+	//CDialog::OnCancel();
+}
+
+
+void CDlgTab2::OnOK()
+{
+	TRACE(_T(__FUNCTION__) _T(": prevent dialog closed by ESC key\n"));
+	//CDialog::OnCancel();
+}
