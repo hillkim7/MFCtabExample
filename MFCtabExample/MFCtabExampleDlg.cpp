@@ -122,8 +122,8 @@ BOOL CMFCtabExampleDlg::OnInitDialog()
 
 	nX = itemRect.left;
 	nY = itemRect.bottom + 1;
-	nXc = tabRect.right - itemRect.left - 1;
-	nYc = tabRect.bottom - nY - 1;
+	nXc = tabRect.right - itemRect.left - 3;
+	nYc = tabRect.bottom - nY - 3;
 
 	m_dlgTab1.reset(new CDlgTab1(NULL, this));
 	m_dlgTab1->Create(CDlgTab1::IDD, &m_tabCtrl1);
